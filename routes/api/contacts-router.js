@@ -9,20 +9,20 @@ const contactsRouter = express.Router();
 
 contactsRouter.get("/", contactsControllers.getAll);
 
-contactsRouter.get("/:id", contactsControllers.getById);
+// contactsRouter.get("/:id", contactsControllers.getById);
 
-contactsRouter.post(
-  "/",
-  validateBody(contactsSchemas.constactsAddSchema),
-  contactsControllers.add
-);
+// contactsRouter.post(
+//   "/",
+//   validateBody(contactsSchemas.constactsAddSchema),
+//   contactsControllers.add
+// );
 
-contactsRouter.delete(
-  "/:id",
-  validateBody(contactsSchemas.constactsAddSchema),
-  contactsControllers.deleteById
-);
+// contactsRouter.delete(
+//   "/:id",
+//   validateBody(contactsSchemas.constactsAddSchema),
+//   contactsControllers.deleteById
+// );
 
-contactsRouter.put("/:id", contactsControllers.updateById);
+// contactsRouter.put("/:id", contactsControllers.updateById);
 
 export default contactsRouter;
