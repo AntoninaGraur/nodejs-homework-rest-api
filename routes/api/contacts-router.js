@@ -11,12 +11,12 @@ contactsRouter.get("/", contactsControllers.getAll);
 
 // contactsRouter.get("/:id", contactsControllers.getById);
 
-// contactsRouter.post(
-//   "/",
-//   validateBody(contactsSchemas.constactsAddSchema),
-//   contactsControllers.add
-// );
+contactsRouter.post(
+  "/",
+  contactsControllers.add
+);
 
+//  validateBody(contactsSchemas.constactsAddSchema),
 // contactsRouter.delete(
 //   "/:id",
 //   validateBody(contactsSchemas.constactsAddSchema),

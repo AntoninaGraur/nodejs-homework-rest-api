@@ -18,11 +18,11 @@ const getAll = async (req, res) => {
 //     res.json(result);
 // };
 
-// const add = async (req, res) => {
-//     const result = await contactsService.addContacts(req.body);
-//     res.status(201).json(result);
-//   res.json({ message: "template message" });
-// };
+const add = async (req, res) => {
+    const result = await Contact.create(req.body);
+    res.status(201).json(result);
+  
+};
 
 // const deleteById = async (req, res) => {
 //     const { id } = req.params;
@@ -47,7 +47,7 @@ const getAll = async (req, res) => {
 export default {
     getAll: ctrlWrapper(getAll),
     // getById: ctrlWrapper(getById),
-    // add: ctrlWrapper(add),
+    add: ctrlWrapper(add),
     // updateById: ctrlWrapper(updateById),
     // deleteById: ctrlWrapper(deleteById),
 }
