@@ -11,6 +11,11 @@ const constactsAddSchema = Joi.object({
   phone: Joi.string().required().messages({
     "any.required": "missing required phone field",
   }),
+  favorite:Joi.boolean(),
 });
 
-export default constactsAddSchema;
+const contctsUpdateFavoriteschema = Joi.object({
+  favorite: Joi.boolean().required(),
+});
+
+export default {constactsAddSchema, contctsUpdateFavoriteschema};
