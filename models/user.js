@@ -22,9 +22,10 @@ const userSchema = new Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
-    token: String,
-  },
-  { versionKey: false, timestamps: true }
+    token: {
+      type: String,
+    },
+  }, { versionKey: false, timestamps: true }
 );
 
 userSchema.pre("findOneAndUpdate", allowUpdateValidate);
@@ -34,6 +35,6 @@ userSchema.post("findOneAndUpdate", handleSaveError);
 userSchema.post("save", handleSaveError);
 
 
-const User = model("users", userSchema);
+const User = model("user", userSchema);
 
 export default User;

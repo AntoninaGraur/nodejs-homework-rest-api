@@ -8,6 +8,8 @@ import { isValidId, authenticate} from "../../middlewares/index.js";
 
 const contactsRouter = express.Router();
 
+contactsRouter.use(authenticate);
+
 contactsRouter.get("/", contactsControllers.getAll);
 
 contactsRouter.get("/:id", isValidId, contactsControllers.getById);
