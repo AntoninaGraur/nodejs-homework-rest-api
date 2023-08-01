@@ -1,30 +1,33 @@
 import { Schema, model } from "mongoose";
 
-import {handleSaveError} from "./hooks/index.js";
+import { handleSaveError, allowUpdateValidate } from "./hooks/index.js";
 
-
-
-const contactSchema = new Schema({
+const contactSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: [true, "Set name for contact"],
+      type: String,
+      required: [true, "Set name for contact"],
     },
     email: {
-        type: String,
+      type: String,
     },
     phone: {
-        type: String,
+      type: String,
     },
     favorite: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
-}, { versionKey:false, timestamps: true});
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
+  },
+  { versionKey: false, timestamps: true }
+);
 
-contactSchema.pre("findOneAndUpdate", function (next) {
-    this.options.runValidators = true;
-    next();
-})
+contactSchema.pre("findOneAndUpdate", allowUpdateValidate);
 
 contactSchema.post("findOneAndUpdate", handleSaveError);
 
