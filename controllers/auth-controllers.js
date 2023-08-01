@@ -10,11 +10,12 @@ dotenv.config();
 const { JWT_SECRET } = process.env;
 
 
-const signup = async (req, res) => {
+
+const register = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (user) {
-        throw new HttpError(409, "Email in use")
+        throw HttpError(409, "Email in use")
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -25,7 +26,7 @@ const signup = async (req, res) => {
     })
 }
 
-const signin = async (req, res) => {
+const login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) { 
@@ -39,7 +40,7 @@ const signin = async (req, res) => {
     const payload = {
         id: user._id,
     }
-    const token = jwt.sign(payload, JWT_SECRET, {expiresIn: "24h"});
+    const token = jwt.sign(payload, JWT_SECRET, {expiresIn: "23h"});
     res.json({ token })
     
    
@@ -47,6 +48,6 @@ const signin = async (req, res) => {
 
 
 export default {
-  signup: ctrlWrapper(signup),
-  signin: ctrlWrapper(signin),
+  register: ctrlWrapper(register),
+  login: ctrlWrapper(login),
 };

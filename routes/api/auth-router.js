@@ -7,15 +7,16 @@ import authControllers from "../../controllers/auth-controllers.js";
 const authRouter = express.Router();
 
 authRouter.post(
-  "/signup",
-  validateBody(usersSchemas.userSignupSchema),
-  authControllers.signup
+  "/register",
+  validateBody(usersSchemas.userRegisterSchema),
+  authControllers.register
 );
 
 authRouter.post(
-  "/signin",
-  validateBody(usersSchemas.userSigninSchema),
-  authControllers.signin);
+  "/login",
+  validateBody(usersSchemas.userLoginSchema),
+  authControllers.login
+);
 
 
 export default authRouter;
