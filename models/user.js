@@ -5,6 +5,7 @@ import { emailRegexp } from "../constants/user-constants.js";
 
 const userSchema = new Schema(
   {
+    
     email: {
       type: String,
       match: emailRegexp,
@@ -25,7 +26,11 @@ const userSchema = new Schema(
     token: {
       type: String,
     },
-  }, { versionKey: false, timestamps: true }
+    avatarURL: {
+      type: String,
+    }
+  },
+  { versionKey: false, timestamps: true }
 );
 
 userSchema.pre("findOneAndUpdate", allowUpdateValidate);
