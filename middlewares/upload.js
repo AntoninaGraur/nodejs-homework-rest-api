@@ -1,24 +1,25 @@
 import multer from "multer";
 import path from "path";
+import { fileURLToPath } from "url";
 
-const destination = path.resolve("temp");
 
-const storage = multer.diskStorage({
-  destination,
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
+const tempDir = path.join(__dirname, "../", "temp");
+
+
+const multerConfig = multer.diskStorage({
+  destination: tempDir,
   filename: (req, file, cb) => {
-      const uniquPrefix = `${Date.now()}-${Math.round(Math.random() * 1E9)}`
-      const filename = `${uniquPrefix}_${file.originalname}`;
-        cb(null, filename);
-    },
+    cb(null, file.originalname);
+  },
 });
-const limits = {
-    fileSize: 1024 * 1024 * 5,
-};
-
 
 const upload = multer({
-    storage,
-    limits,
+  storage: multerConfig,
 });
 
 export default upload;

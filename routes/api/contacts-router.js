@@ -15,11 +15,11 @@ contactsRouter.get("/", contactsControllers.getAll);
 
 contactsRouter.get("/:id", isValidId, contactsControllers.getById);
 
-contactsRouter.post(
-  "/", upload.single("avatar"), 
-  validateBody(contactsSchemas.constactsAddSchema),
-  contactsControllers.add
-);
+// contactsRouter.post(
+//   "/", upload.single("avatar"), 
+//   validateBody(contactsSchemas.constactsAddSchema),
+//   contactsControllers.add
+// );
 
 contactsRouter.delete(
   "/:id", isValidId,

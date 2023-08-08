@@ -5,7 +5,6 @@ import { emailRegexp } from "../constants/user-constants.js";
 
 const userSchema = new Schema(
   {
-    
     email: {
       type: String,
       match: emailRegexp,
@@ -25,10 +24,12 @@ const userSchema = new Schema(
     },
     token: {
       type: String,
+      default: "",
     },
     avatarURL: {
       type: String,
-    }
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
