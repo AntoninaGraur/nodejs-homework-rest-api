@@ -5,6 +5,11 @@ import { emailRegexp } from "../constants/user-constants.js";
 
 const userSchema = new Schema(
   {
+//     name: {
+//       type: String,
+//       required: true,
+// },
+
     email: {
       type: String,
       match: emailRegexp,
