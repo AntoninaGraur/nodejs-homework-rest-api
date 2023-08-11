@@ -4,12 +4,17 @@ import { handleSaveError, allowUpdateValidate } from "./hooks/index.js";
 
 const contactSchema = new Schema(
   {
-   
+    name: {
+      type: String,
+      required: [true, "Set name for contact"],
+    },
     email: {
       type: String,
+      required: [true, "Set email for contact"],
     },
     phone: {
       type: String,
+      required: [true, "Set phone for contact"],
     },
     favorite: {
       type: Boolean,
@@ -19,9 +24,6 @@ const contactSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
       required: true,
-    },
-    avatarURL: {
-      type: String,
     },
   },
   { versionKey: false, timestamps: true }
