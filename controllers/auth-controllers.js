@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from 'fs/promises';
 import { fileURLToPath } from "url";
+import gravatar from "gravatar";
 
 dotenv.config();
 const { JWT_SECRET } = process.env;
