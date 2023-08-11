@@ -29,4 +29,9 @@ authRouter.patch(
   upload.single("avatar"),
   authControllers.updateAvatar
 );
+
+authRouter.get("/verify/:verificatinCode", authControllers.verify);
+
+authRouter.post("/verify", validateBody(usersSchemas.emailSchema), authControllers.resendVerifyEmail);
+
 export default authRouter;
