@@ -5,16 +5,19 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import path from "path";
-import fs from 'fs/promises';
+import fs from "fs/promises";
 import { fileURLToPath } from "url";
+import gravatar from "gravatar";
 
-dotenv.config();
-const { JWT_SECRET } = process.env;
+
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const avatarsDir = path.join(__dirname, "../", "public", "avatars");
+
+dotenv.config();
+const { JWT_SECRET } = process.env;
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -27,10 +30,13 @@ const register = async (req, res) => {
 
   const avatarURL = gravatar.url(email);
 
-  const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL, });
+  const newUser = await User.create({
+    ...req.body,
+    password: hashPassword,
+    avatarURL,
+  });
   res.status(201).json({
-    email: newUser.email,
-    subscription: newUser.subscription,
+    user: { email: newUser.email, subscription: newUser.subscription },
   });
 };
 
@@ -50,13 +56,11 @@ const login = async (req, res) => {
   };
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
   await User.findByIdAndUpdate(user._id, { token });
-
   res.json({ token });
 };
 
 const getCurrent = (req, res) => {
   const { email, subscription } = req.user;
-
   res.json({ email, subscription });
 };
 
